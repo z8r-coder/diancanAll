@@ -1,0 +1,83 @@
+body{
+		 background: url(../img/usr_info_back.png);
+		 background-attachment: fixed; 
+		background-repeat:no-repeat;
+		 height:100%;
+		 width:100%;
+		 background-size:cover;
+	}
+				.one {    
+			    width: 20px;    
+			    margin: 0 auto;    
+			    line-height: 24px;    
+			    font-size: 15px; 
+			    cursor: pointer; 
+			   }  
+			
+			#cqu { 
+		float: left;
+		margin-top:0px;
+		margin-left: 50px;		   
+        width: 20px;    
+        font-family:"楷体";    
+         line-height: 24px;    
+         font-size: 20px;  
+          }  
+			
+			#home {
+				float: left;
+				margin-top:-120px;
+				margin-left: 40px;
+				width: 50px;
+				height: 60px;
+				background:url(../img/home.png);
+				border:none;	
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;			
+			}
+			
+			#gwc {
+				float: left;
+				margin-top:-60px;
+				margin-left: 40px;
+				width: 50px;
+				height: 60px;
+				background:url(../img/gwc.png) no-repeat;
+				border:none;
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;				
+			}
+			
+			.wrap {
+				  display: table;
+				  margin-top: 180px;
+				  margin-left:170px;
+				  height: 200px;
+				  width: 180px;
+				 <!-- border: 2px solid #0cf;-->
+				}
+				
+				.left {
+				  display: table-cell;
+				  vertical-align: auto;
+				  width: 60px;
+				}
+				.middle{
+					display:table-cell;
+				  vertical-align: auto;
+					width:60px;
+				}
+				.right {
+				  display: table-cell;
+				  vertical-align: auto;
+				  width: 60px;
+				}
+				.container{
+					margin: -250px 350px;
+					width: 600px;
+					height: 400px;	
+				}
+				
+				

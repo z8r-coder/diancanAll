@@ -1,0 +1,180 @@
+<!-- 优惠券列表页面 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background: url(../img/pop.png);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+			}
+			.texttitle{
+				margin-top: 50px;
+				margin-left: 12px;
+				letter-spacing: 10px;
+				font-size: 24px;
+				color: whitesmoke;
+			}
+			.usrtitle{
+				margin-top:25px;
+				margin-left: 90px;
+				width:200px;
+				height:40px;
+			<!--	border:2px solid #434A52;-->
+				padding-top: 10px;
+				padding-left:10px;
+				padding-bottom: 20px;
+			}
+		
+				.curbalan{
+				border:2px solid transparent;
+				margin-left: 100px;
+				margin-top: 0px;
+				width: 200px;
+				height: 20px;
+				font-size: 15px;
+			}
+			#coupons{
+				margin-top: 5px;
+				display:block;
+				width: 350px;
+				max-height: 250px;
+				overflow-y:scroll;
+			}
+			
+		#coupons::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 7px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+       }        
+        #coupons::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 7px;
+         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #FFE7BA;
+       }
+        #coupons::-webkit-scrollbar-track {/*滚动条里面轨道*/
+       	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 7px;
+        border-width: 0;
+        background: #FFF8DC;
+        }
+			
+			.coulo1{
+				background: url(../img/coupon1.png);
+				background-size: 100%; 				
+				margin-top: 12px;
+				margin-left: 100px;
+				width: 200px;
+				height: 50px;
+				padding: 10px 10px;
+			}
+			.coulo2{
+				background: url(../img/coupon2.png);
+				background-size: 100%; 				
+				margin-top: 12px;
+				margin-left: 100px;
+				width: 200px;
+				height: 50px;
+				padding: 10px 10px;
+			}
+			.coulo_dc1{			
+				font-size: 20px;
+				font-weight: 400;
+			}
+			.coulo_dc2{			
+				font-size: 20px;
+				font-weight: bold;
+				margin-top: -65px;
+				margin-left: 155px;
+			}
+			.coulo_amt{	
+				margin-top: 2px;		
+				font-size: 8px;
+			}
+			.coulo_date{
+				margin-top:5px;
+				font-size: 8px;
+			}			
+				.enlo{
+				margin-top: 30px;
+				margin-left: 250px;
+				width: 60px;
+				border:2px solid transparent;
+			}
+		</style>
+	</head>
+	
+	
+	
+	
+	<body>
+		
+		<div class="texttitle">
+			<p>优惠券</p>
+		</div>
+		
+		<div class="usrtitle">
+			<div>优惠券</div>
+			<div style="padding-top: 5px;">COUPONS</div>
+		</div>
+		
+		<div>
+			<div class="curbalan" >
+				优惠券<span style="font-size: 12px;">(张)</span>：
+				<span id="coupon_num"></span>
+			</div>
+		</div>
+		<div id="coupons">		
+        </div>
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js" ></script>
+	<script type="text/javascript" src="../js/cookieSet.js" ></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		var user_id=getCookie("user_id");
+        if(user_id==null || user_id=="")
+            parent.window.location.href="../login.html"; 	
+			
+		//请求优惠券列表	
+		var u_i_url="http://192.168.1.196:9090//outerApi/getUserCoupon?user_id="+user_id;	
+         $.ajax({
+			type:"post",
+			url:u_i_url,
+			timeout:1000,
+			contentType: "application/x-www-form-urlencoded",
+			async:false,
+			error:function(){
+				alter('Failed to communicate to the server. Try again!')
+			},
+			success:function(r){
+				var result=eval('('+r+')');
+				if(result["rspCode"]=="DC00000")
+				{
+					$("#coupon_num").text(result["coupon_num"]);
+					var coupons=eval('('+result["coupon_list"]+')'); 
+					$("#coupons").empty();
+					for(var i=0;i<coupons.length;i++)
+					  addCoupon(coupons[i]);
+				}
+			}
+		  });                   
+        });
+        
+        //列表中添加优惠券
+        function addCoupon(coupon)
+        {
+          var c="coulo2";
+          if(coupon["couponId"]=="1")	
+             c="coulo1"; 
+          $("#coupons").append('<div class="'+c+'"><div class="coulo_dc1">'+coupon["discount"]
+          +'圆代金券</div><div class="coulo_amt">'+coupon["consu_amt"]
+          +'圆可用</div><div class="coulo_date">'+coupon["start_time"].substring(0,10)+' 至 '
+          +coupon["expire_time"].substring(0,10)
+          +' </div><div class="coulo_dc2">'+coupon["discount"]+'圆</div> </div>');
+        }
+             
+	</script>
+
+
+	</body>
+</html>

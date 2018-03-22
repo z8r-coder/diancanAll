@@ -1,0 +1,179 @@
+<!-- 修改个人资料页面 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		  <!-- Bootstrap Core CSS -->
+	    <link href="../css/bootstrap.min.css" rel="stylesheet">
+		
+		<style>
+			body{
+				background: url(../img/pop.png);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+			}
+			.texttitle{
+				margin-top: 50px;
+				margin-left: 20px;
+				letter-spacing: 10px;
+				font-size: 24px;
+				color: whitesmoke;
+			}
+			.usrtitle{
+				margin-top:35px;
+				margin-left: 90px;
+				width:200px;
+				height:40px;
+			<!--	border:2px solid #434A52;-->
+				padding-top: 10px;
+				padding-left:10px;
+				padding-bottom: 20px;
+			}
+		
+			.perinfo{
+				margin-top: 35px;;
+				
+			}
+			.coulo{
+				margin-top: 20px;
+				margin-left: 100px;
+			}
+				.enlo{
+				margin-top: 20px;
+				margin-left: 250px;
+				width: 60px;
+				border:2px solid transparent;
+			}
+			 input[type="text"] {
+				border:none; border-bottom:2px solid brown;outline: none;
+				width: 140px;
+				margin-left: 10px;
+				font-size: 20px;
+				}
+			input[type="radio"] {
+				width: 50px;
+				margin-left: 0px;
+				
+				}	
+		</style>
+	</head>	
+	<body>		
+		<div class="texttitle">
+			<p>个人信息</p>
+		</div>
+		
+		<div class="usrtitle">
+			<div>个人信息</div>
+			<div style="padding-top: 5px;">PERSONAL INFORMATION</div>
+		</div>
+		
+		<div class="perinfo">
+			<div class="coulo">
+				<div>姓名：<input type="text" id="user_name" /></div>
+			</div>
+			<div class="coulo" >
+				<div >性别：<input type="radio" name="user_gender"  value="0">男
+				    <input type="radio" name="user_gender" value="1"> 女</div>
+			</div>
+			<div class="coulo">
+				<div>生日：<input type="text" id="user_birth"/></div>
+			</div>
+			<div class="coulo">
+				<div>联系方式：<input type="text" id="user_phone"/></div>
+			</div>
+		</div>
+		
+		 <div class="enlo">  
+			<button id="btnsm" onclick="modifiedUserInfo()" type="button" class="btn btn-default">确定</button>
+		 </div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js" ></script>
+	<script type="text/javascript" src="../js/laydate.js"></script> 
+	<script type="text/javascript" src="../js/cookieSet.js" ></script>
+	<script type="text/javascript">
+		//日历实例化
+		laydate.render({
+          elem: '#user_birth', //指定元素
+       }); 
+	    $(document).ready(function(){
+	      var user_id=getCookie("user_id");
+          if(user_id==null || user_id=="")
+            parent.window.location.href="../login.html"; 
+	    		    	
+	    	//请求获取个人信息
+	 	   $.ajax({
+                type: "POST",//方法类型
+                url: "http://192.168.1.196:9090//outerApi/getUserDetailInfo?user_id="+user_id,//url
+                contentType: "application/x-www-form-urlencoded",
+                async: false,
+                success: function (r) {
+                	 var result = eval( '(' + r + ')' );  
+                	 if (result["rspCode"] == "DC00000")
+                	 {
+                	 	$("#user_name").val(result["user_name"]); 
+                	 	$("#user_birth").val(result["user_birth"]); 
+                	 	if(result["user_gender"]=="男")
+                	 	  $(":radio[name='user_gender'][value='0']").prop("checked", "checked");
+                	    //  $("input[name='user_gender']").val(0); 
+                	    else
+                	     $(":radio[name='user_gender'][value='1']").prop("checked", "checked");
+                	     // $("input[name='user_gender']").val(1); 
+                	 	$("#user_phone").val(result["phone"]); 
+                	 }else
+                      parent.sweetAlert("提示",result["rspMsg"],"warning");
+                },
+              error : function() {
+                    parent.sweetAlert("提示","异常！", "warning");
+                }
+              });
+           });
+         
+         //提交更新个人信息
+         function modifiedUserInfo()
+         {
+         	 var user_name=$("#user_name").val(),user_birth=$("#user_birth").val(),
+         	 user_gender=$('input:radio:checked').val(),user_phone=$("#user_phone").val();
+        	if(!isPoneAvailable(user_phone))
+        	{
+        	  parent.sweetAlert("提示","手机号无效！","warning");
+        	  return;
+        	}
+         	 $.ajax({
+                type: "POST",//方法类型
+                url: "http://192.168.1.196:9090//outerApi/modifiedUserInfo?user_id="+getCookie("user_id")
+                +"&user_name="+user_name+"&user_birth="+user_birth
+                +"&user_gender="+user_gender+"&user_phone="+user_phone,//url
+                contentType: "application/x-www-form-urlencoded",
+                async: false,
+                success: function (r) {
+                	 var result = eval( '(' + r + ')' );  
+                	 if (result["rspCode"] == "DC00000")
+                	 {
+                	 parent.swal({ 
+                     title: "", 
+                     type: "success",
+                     text: "修改成功！",                
+                   },function(){window.location.href='usr/showinfo.html'; });
+                	 
+                	 }else
+                      parent.sweetAlert("提示",result["rspMsg"],"warning");
+                },
+              error : function() {
+                    parent.sweetAlert("提示","异常！", "warning");
+               }
+           });
+         }
+         
+          //手机号正则表达式验证  
+       function isPoneAvailable(str) {  
+          var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+          if (!myreg.test(str)) {  
+              return false;  
+          } else {  
+              return true;  
+          }  
+        } 
+     </script>
+</html>
+

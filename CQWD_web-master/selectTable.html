@@ -1,0 +1,51 @@
+<!-- 选择餐桌页面 -->
+<!DOCTYPE html>
+<html>
+	<head> 
+		<meta charset="UTF-8">
+		<title>重庆味道在线点餐系统</title>
+		<!-- 内部文档样式表 -->
+		<link rel="stylesheet" href="css/selectTable.css" />
+	</head>
+	<body>
+		<div id="cfTable">
+			<form id="form1" name="form1" method="post" action="#">
+				<dl>
+				    <dt>请选择餐桌</dt>
+				    <dd> <input type="radio" name="cfType"  value="1">中餐厅
+				    <input type="radio" name="cfType" value="2"> 西餐厅</dd>
+				    <br />
+				    <dd>
+				       人数：<select name="cfCount" id="cfCount"  required="required"  class="myselect" style="width: 200px;">
+				    	<option value="">请选择用餐人数</option> 
+				    	<option value="2">2人</option> 
+				    	<option value="4">4人</option> 
+				    	<option value="10">10人</option> 
+				    </select>	
+				    </dd>
+				    <dd>日期：<input name="cfDate" id="seldate" class="sod_select" placeholder="请选择用餐日期" />  </dd>
+				     <dd>时段：<select name="cfTime" id="cfTime" required="required"  class="myselect">
+				    	<option value="">请选择用餐时段</option> 
+				    	<option value="0">上午</option> 
+				    	<option value="1">中午</option> 
+				    	<option value="2">晚上</option> 
+				    </select></dd>
+				    <dd>桌号：<select name="cfNo" id="cfNo" required="required"  class="myselect">
+				    	<option value="">请选择用餐桌号</option>  
+				    </select></dd>
+				    <dd></dd>
+				    <dd><input type="button" value="确定" onclick="submitForm()" class="btn-submit" /></dd>
+			    </dl>
+			</form>
+		</div>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>		
+
+<script type="text/javascript" src="js/cookieSet.js" ></script>
+<script type="text/javascript" src="Select-or-Die/js/selectordie.min.js" ></script>
+<link rel="stylesheet" href="Select-or-Die/css/selectordie.css" />
+<link rel="stylesheet" href="Select-or-Die/css/selectordie_theme_02.css" />
+<script type="text/javascript" src="js/laydate.js"></script> 
+<script type="text/javascript" src="js/selectTable.js" ></script> 
+
+</body>
+</html>

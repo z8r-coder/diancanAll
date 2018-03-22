@@ -1,0 +1,35 @@
+<!-- 登录页面 -->
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+	 <script src="js/sweet-alert.min.js"></script>
+   <link rel="stylesheet" href="css/sweet-alert.css">
+  <meta charset="UTF-8">
+  <title>重庆味道在线点餐系统</title>     
+      <link rel="stylesheet" href="css/style.css">  
+</head>
+
+<body>
+    <div id="login">   	
+      <form name='form1'>
+      	<h1>登录</h1>
+        <span class="fontawesome-user"></span>
+          <input type="text" maxlength="11" name="tel" id="user" placeholder="手机号">
+       
+        <span class="fontawesome-lock"></span>
+          <input type="password" maxlength="8" name="password" id="pass" placeholder="密码">
+        
+        <input type="button" onclick="register()" value="注册">
+        <input type="button" onclick="login()" value="登录">
+
+</form>
+<input type="hidden" id="refreshed" value="no"> 
+</body>
+
+	 <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/sha1.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/cookieSet.js" ></script>
+
+</html>

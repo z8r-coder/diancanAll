@@ -1,0 +1,166 @@
+body {
+				font-family: "楷体";
+				font-size: 16px;				
+				background: url(../img/caipinbj.png) top center;
+				background-attachment: fixed; 
+				background-repeat:no-repeat;
+				height:100%;
+				width:100%;
+				background-size:cover;			
+			}
+			
+			#cqu { 
+		float: left;
+		margin-top:150px;
+		margin-left: -40px;		   
+        width: 20px;    
+        font-family:"楷体";    
+         line-height: 24px;    
+         font-size: 20px;  
+          }  
+			
+			#home {
+				float: left;
+				margin-top:40px;
+				margin-left: 40px;
+				width: 50px;
+				height: 60px;
+				background:url(../img/home.png);
+				border:none;	
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;			
+			}
+			
+			#gwc {
+				float: left;
+				margin-top:100px;
+				margin-left: -45px;
+				width: 50px;
+				height: 60px;
+				background:url(../img/gwc.png) no-repeat;
+				border:none;
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;				
+			}
+							
+			#myTab {
+				float: right;
+				margin-right: 23%;
+				cursor: pointer;
+				font-size:16px;
+				border:none;	
+				outline:none;
+			}   
+			#myTab li{
+				text-align: center;
+			}
+			
+			#cfType {
+				float:left;
+			   position:absolute;
+               margin:3% 0 0 10% ;
+              *margin:3% 0 0 10% ;  		
+				width: 100%;
+				border-radius: 10px;				
+				/*margin:auto 0;*/
+			}
+			
+			#cfFood {
+				float:left;	
+				position:absolute;		
+               margin:8% 0 0 10% ;
+              *margin:8% 0 0 10% ;  
+				width: 100%;
+				border-radius: 10px;
+				font-size: 20px;
+			}
+			
+        
+        .food{
+        	float:left;
+        	margin-left: 50px; 
+        	height: 250px;
+        }
+                
+            .btn-remove {
+        	  
+				width: 20px;
+				height: 20px;				
+			    background: url(../img/remove.png) center center;
+				border:none;	
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;
+				margin-right: 15px;	
+				margin-left: 50px;
+				background-size:cover		 				
+			}
+			.btn-add {				
+				width: 20px;
+				height: 20px;				
+			    background: url(../img/add.png)  center center;
+				border:none;	
+				outline:none;
+				cursor: pointer;	
+				vertical-align: top;
+				margin-right: 10px;
+				margin-left: 15px;
+				background-size:cover		 				
+			}
+			
+		 
+
+        a:hover {
+        	cursor: pointer;
+        	color: red;} //鼠标移近 	
+        
+        
+        #cfFood ul{float:right;width:100px;
+        overflow:hidden;list-style:none;} 
+        #cfFood ul li{float:right;display:inline;margin-right:10px;
+        width:14px;height:250px;font-size:14px;
+        word-wrap:break-word;word-break:nomal;} 
+        #cfFood img{float:right;margin-bottom: 20px;}
+        
+        .one {    
+    padding-top: 5px; 
+    letter-spacing:2px;
+    float:right; 
+    font-size:14px;
+    height: 250px;    
+    writing-mode: vertical-rl;   
+    writing-mode: tb-rl;
+} 
+ 		
+.pagination1 {
+   float:left;
+   position:absolute;
+   margin:42% 0 0 25% ;
+   *margin:42% 0 0 25% ;  		
+	width: 100%;
+}	
+.pagination1 ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.pagination1 ul li {display: inline;}
+
+.pagination1 ul li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 8px;
+}
+
+.pagination1 ul li a.active {
+    background-color: deepskyblue;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination1 ul li a:hover:not(.active) {background-color: #ddd;}	

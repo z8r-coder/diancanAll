@@ -1,0 +1,66 @@
+          input, select{
+          box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          }
+			#cfType {
+				position: relative;
+				width: 360px;
+				border-radius: 10px;
+			}
+			#cfType dl dt {
+			
+				font-size: 16px;
+				font-weight: 400;
+				text-align: center;
+				line-height: 50px;
+				color: black;				
+				float: left;
+			    margin-right: 30px;
+				
+			}
+			#cfType dl dt span {
+				letter-spacing: 2px;
+			}
+			#cfType dl dd {
+				font-size: 16px;
+				font-weight: 400;
+				margin: 5px 0px;
+				text-align: center;
+				
+			}
+			.input-size {
+				width: 260px;
+				height: 26px;
+				padding-left: 5px; /* 左部填充 */
+				line-height: 26px;
+			}
+			.btn-submit {
+				width: 270px;
+				height: 35px;
+				line-height: 30px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				/*background-color: black;*/
+				opacity:0.7;
+				border: 0px;
+				color: black;
+				cursor: pointer;
+				
+			}
+			.btn-submit:hover {
+				opacity: 0.8;
+			}			
+		  a {
+		  width: 40px;              
+          line-height: 60px;    
+          font-size: 40px;  
+          float:left;
+          text-align:center;
+          margin-left: 30px;
+		  color: black;
+		  text-decoration:none;
+		  cursor: pointer;
+		  }   
+
+      a:hover {color: red;} //鼠标移近	

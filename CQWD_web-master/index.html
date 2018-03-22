@@ -1,0 +1,65 @@
+<!-- 选择菜品页面 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/sweet-alert.min.js"></script>
+        <link rel="stylesheet" href="css/sweet-alert.css">      
+		<meta charset="UTF-8">
+		<title>重庆味道在线点餐系统</title>
+		<!-- 内部文档样式表 -->
+		<link rel="stylesheet" href="css/caipin.css" />
+	</head>
+	<body>
+		
+    <ul id="myTab" class="nav nav-tabs">	
+	<li class="dropdown">
+		<a onclick="isLogin()" id="welcome" class="dropdown-toggle" 
+		   data-toggle="dropdown">
+			欢迎您，<span id="username"></span>&nbsp;&nbsp;<b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu pull-right" style="width: 100%;background:transparent;" role="menu" aria-labelledby="welcome">
+			<li><a  onclick="info()" tabindex="-1" data-toggle="tab">个人中心</a></li>
+			<li class="divider"></li>
+			<li><a  onclick="logout()" tabindex="-1" data-toggle="tab">退出登录</a></li>
+		</ul>
+	</li>
+   </ul>
+		<button id="home" onclick="window.location.href='index.html';"></button>
+		<button id="gwc" onclick="window.location.href='clientOrderList.html';"><</button>
+		<div id="cqu">重庆味道</div> 
+		<div id="cfType" >		
+			<form id="form1" name="form1" >
+				选择菜系：<select name="caixi" id="caixi" required="required"
+					onchange="sele_Change()"  class="myselect" > 
+				</select>
+			</form>
+		</div>
+		<div id="cfFood" >	
+			
+		</div>
+		
+        <div  class="pagination1" name="pagination" >        
+           <ul id="pag" >
+           	<li><a id="aPre" onclick="loadPre()" >﹤</a></li>
+           	<li><a id="a1" onclick="loadN(1)" class="active">1</a></li>
+           	<li><a id="a2" onclick="loadN(2)" >2</a></li>
+           	<li><a id="a3" onclick="loadN(3)" >3</a></li>
+           	<li><a id="a4" onclick="loadN(4)" >4</a></li>
+           	<li><a id="a5" onclick="loadN(5)" >5</a></li>
+           	<li><a id="aNext" onclick="loadNext()" >﹥</a></li>
+           </ul>	
+            <input type="hidden" id="pageIndex" value="1">
+            <input type="hidden" id="maxPage" value="5">
+       </div>
+		<input type="hidden" id="refreshed" value="no"> 
+	</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>	
+<script type="text/javascript" src="Select-or-Die/js/selectordie.min.js" ></script>
+<link rel="stylesheet" href="Select-or-Die/css/selectordie.css" />
+<link rel="stylesheet" href="Select-or-Die/css/selectordie_theme_02.css" />
+<script type="text/javascript" src="js/cookieSet.js" ></script>
+<script type="text/javascript" src="js/caipin.js" ></script>    
+
+</html>

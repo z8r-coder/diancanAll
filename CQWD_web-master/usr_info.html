@@ -1,0 +1,45 @@
+<!-- 个人中心页面 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		    <meta name="description" content="Login">
+		    <meta name="author" content="Amber">
+    		<title>重庆味道在线点餐系统</title>
+	        <script src="js/sweet-alert.min.js"></script>
+            <link rel="stylesheet" href="css/sweet-alert.css">
+		    <link href="css/bootstrap.min.css" rel="stylesheet">
+		    <link rel="stylesheet" href="css/usr_info.css" />
+	</head>
+	
+	
+	
+	<body>
+		<button id="home" onclick="window.location.href='index.html';"></button>
+		<button id="gwc" onclick="window.location.href='clientOrderList.html';"><</button>
+		<div id="cqu">重庆味道</div> 
+			<div class="wrap">
+				<div class="left">
+					 <div class="one" onclick="intoCon()">叁
+					 	<img src="img/verline.png"></img> 联系我们</div>    
+				 </div>
+				  <div class="middle">
+				 	<div class="one" onclick="intoOrder()">贰
+				 		<img src="img/verline.png"></img> 订单信息</div>    
+				</div>
+				 <div class="right">
+				 	<div class="one" onclick="intoInfo()">壹	 	
+				 		<img src="img/verline.png"></img> 账户</div>    
+				</div>
+			</div>		
+			
+			<div class="container">
+				<iframe src="usr/in_info.html" style="width: 600px; height: 500px;border: 0px;"></iframe>
+			</div>		
+	</body>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+	<script type="text/javascript" src="js/usr_info.js">	
+	</script>
+	
+</html>

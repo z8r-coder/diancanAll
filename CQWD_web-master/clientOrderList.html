@@ -1,0 +1,103 @@
+﻿<!-- 购物车页面 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/sweet-alert.min.js"></script>
+        <link rel="stylesheet" href="css/sweet-alert.css">
+		<meta charset="UTF-8">
+		<title>重庆味道在线点餐系统</title>
+		<!-- 内部文档样式表 -->
+		<link rel="stylesheet" href="css/clientOrderList.css" />
+	</head>
+	<body>
+		
+	<ul id="myTab" class="nav nav-tabs">	
+	<li class="dropdown" >
+		<a href="#" id="welcome" class="dropdown-toggle" 
+		   data-toggle="dropdown">欢迎您，<span id="username"></span>&nbsp;<b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu pull-right" style="width: 100%;background:transparent;" role="menu" aria-labelledby="welcome">
+			<li><a onclick="info()" tabindex="-1" data-toggle="tab">个人中心</a></li>
+			<li class="divider"></li>
+			<li><a onclick="logout()" tabindex="-1" data-toggle="tab">退出登录</a></li>
+		</ul>
+	</li>
+   </ul>	
+		<button id="home" onclick="window.location.href='index.html';"></button>
+		<button id="gwc" onclick="window.location.href='clientOrderList.html';"><</button>
+		<div id="cqu">重庆味道</div> 
+		<img id="jt" src="img/jt.png" />
+			
+		
+	 <div id="orderlist">			
+			<form id="form1" name="form1" method="get" action="#">
+				<dl>
+				    <dt>订单列表</dt>				    
+				    <dd >
+				    <table align="center" width="100%" >
+				    <thead>	
+					<tr >
+				 		<td align="center" width="20%">菜名</td>
+				 		<td align="center" width="20%">单价</td>
+				 		<td align="center" width="20%">数量</td>
+				 		<td align="center" width="20%">小计</td>
+				    </tr>
+				    </thead>
+				    <tbody id="tbody-list" >                  							    				    
+				    </tbody>  
+				    <br /><br />
+				    <tfoot>
+					<tr>
+						<td colspan="6" align="center" >总计:
+							<span style="font-size:20px;">&yen;</span>
+							<label
+								id="summ" style="font-size:20px"></label>
+						</td>
+					</tr>
+				    </tfoot>					
+				</table>				
+				    </dd>
+				    <dd id="vipdd">
+				    <input type="radio" name="cType"  value="0" checked="checked" >				   
+				    	&nbsp;VIP价格:
+							<span style="margin-left:15px;font-size:15px;">&yen;</span>
+							<label
+								id="vipm" style="font-size:15px"></label>
+				    </dd>
+				    <dd>
+				    	<input type="radio" name="cType" value="1"> 
+				    	&emsp;优惠券:
+							
+							<select id="Coupon" disabled>
+								<option value="">不使用</option>
+							</select>
+						</td>
+				    </dd>
+				    <dd>
+				    	&emsp;&emsp;&emsp;&nbsp;实付:
+							<span style="margin-left:15px;font-size:15px;">&yen;</span>
+							<label
+								id="totalm" style="font-size:15px"></label>
+				    </dd>
+				    <dd><input type="button" onclick="checkOut()" value="结账" class="btn-submit" /></dd>
+			    </dl>
+			</form>
+		</div>
+		<div id="selectTable">
+			<iframe name="FrameTable" frameborder="0" scrolling="no" 
+			width="100%" height="100%"	src="selectTable.html">
+			</iframe>
+	    </div>	
+	    <input type="hidden" id="refreshed" value="no"> 
+	</body>	
+	<script src="js/jquery-3.3.1.min.js"></script>	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>	
+    <script type="text/javascript" src="js/cookieSet.js" ></script>
+     <script type="text/javascript" src="Select-or-Die/js/selectordie.min.js" ></script>
+     <link rel="stylesheet" href="Select-or-Die/css/selectordie.css" />
+     <link rel="stylesheet" href="Select-or-Die/css/selectordie_theme_04.css" />
+	 <script type="text/javascript" src="js/clientOrderList.js" ></script>
+     
+
+</html>
