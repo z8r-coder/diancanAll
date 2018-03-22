@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ineedwhite.diancan.dao.dao.UserDao">
+    <insert id="insertUser">
+        INSERT INTO dc_user(user_id, user_name, user_phone, accumulate_points, balance, member_level, user_is_del,user_password, user_coupon, user_card_no,user_register_time)
+        VALUES (#{User.user_id},#{User.user_name}, #{User.user_phone}, #{User.accumulate_points},#{User.balance}, #{User.member_level}, #{User.user_is_del}, #{User.user_password}, #{User.user_coupon}, #{User.user_card_no}, #{User.user_register_time})
+    </insert>
+    
+    <select id="selectUserByPhone" resultType="com.ineedwhite.diancan.dao.domain.UserDo">
+        SELECT user_id, user_password, user_phone, user_name,
+        accumulate_points, balance, member_level, user_coupon, user_card_no
+        FROM dc_user WHERE user_is_del = 0 AND user_phone = #{user_phone}
+    </select>
+
+    <select id="selectUserByUsrId" resultType="com.ineedwhite.diancan.dao.domain.UserDo">
+        SELECT user_id, user_password, user_phone, user_name,
+        accumulate_points, balance, member_level, user_coupon, user_card_no,
+        user_gender,user_birth
+        FROM dc_user WHERE user_is_del = 0 AND user_id = #{user_id}
+    </select>
+
+    <select id="selectCouponByUsrId" resultType="java.lang.String">
+        SELECT user_coupon FROM dc_user WHERE user_is_del = 0 AND user_id = #{user_id};
+    </select>
+
+    <update id="updateUsrAcptAndBcAndmemLvlCp">
+        UPDATE dc_user SET accumulate_points = #{accumulate_points}, balance = #{balance},
+        member_level = #{member_level}, user_coupon = #{user_coupon}
+        WHERE user_id = #{user_id};
+    </update>
+
+    <update id="updateUsrGdrAndNmAndBirAndPhoneById">
+        UPDATE dc_user SET user_name = #{user_name}, user_birth = #{user_birth},
+        user_gender = #{user_gender}, user_phone = #{user_phone}
+        WHERE user_id = #{user_id}
+    </update>
+
+    <update id="updateUsrBalanceById">
+        UPDATE dc_user SET balance = #{user_balance}, member_level = #{user_vip}, accumulate_points = #{accumulate_points}
+        WHERE user_id = #{user_id}
+    </update>
+
+    <update id="updateUsrCouponById">
+        UPDATE dc_user SET user_coupon = #{user_coupon}
+        WHERE user_phone = #{user_phone}
+    </update>
+</mapper>

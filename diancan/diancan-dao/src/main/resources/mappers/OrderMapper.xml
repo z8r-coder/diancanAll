@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ineedwhite.diancan.dao.dao.OrderDao">
+    <select id="selectBoardIdByTime" resultType="java.lang.Integer">
+        SELECT board_id FROM dc_order
+        WHERE order_board_date = #{order_board_time}
+        AND order_board_time_interval = #{order_time_interval}
+    </select>
+
+    <insert id="insertOrderInfo">
+        INSERT INTO dc_order (order_id, board_id, order_people_number, order_date, order_board_date, order_board_time_interval, order_total_amount, order_status,user_id, coupon_id, order_food, order_food_num)
+        VALUES (#{Order.order_id}, #{Order.board_id}, #{Order.order_people_number}, #{Order.order_date}, #{Order.order_board_date}, #{Order.order_board_time_interval},#{Order.order_total_amount}, #{Order.order_status},#{Order.user_id}, #{Order.coupon_id}, #{Order.order_food}, #{Order.order_food_num})
+    </insert>
+
+    <select id="selectOrderByTimeAndBoardId" resultType="java.lang.String">
+        SELECT order_id FROM dc_order
+        WHERE order_board_date = #{order_board_time}
+        AND order_board_time_interval = #{order_time_interval}
+        AND board_id = #{board_id}
+    </select>
+
+    <select id="selectOrderByTimeAndBoardIdAndStatus" resultType="java.lang.String">
+        SELECT order_id FROM dc_order
+        WHERE order_board_date = #{order_board_time}
+        AND order_board_time_interval = #{order_time_interval}
+        AND board_id = #{board_id}
+        AND order_status = #{order_status}
+    </select>
+
+    <select id="selectOrderByStatusWithoutClose" resultType="java.lang.String">
+        SELECT order_id FROM dc_order
+        WHERE order_status = 'UK' OR order_status = 'UM';
+    </select>
+
+    <select id="selectOrderById" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, board_id, order_people_number, order_date, order_board_date,
+        order_board_time_interval,order_total_amount, order_status,user_id,coupon_id, order_food,
+        order_food_num,order_paid FROM dc_order
+        WHERE order_id = #{OrderId}
+    </select>
+
+    <update id="updateOrderStsById" parameterType="java.lang.String">
+        UPDATE dc_order SET order_status = #{ordSts}
+        where 1=1
+        <if test="OrderIdList.size()>0">
+            and order_id in
+            <foreach item="item" collection="OrderIdList" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </update>
+    
+    <select id="selectUserInfoByOrdId" resultType="com.ineedwhite.diancan.dao.domain.UserDo">
+        SELECT usr.user_id, usr.user_coupon, usr.member_level, usr.balance, usr.accumulate_points
+        FROM dc_order ord, dc_user usr
+        WHERE ord.order_id = #{OrderId} AND ord.user_id = usr.user_id AND usr.user_is_del = 0;
+    </select>
+
+    <update id="updateOrderInfoByOrdId">
+        UPDATE dc_order SET order_food_num = #{order_food_num}, order_status = #{order_status},
+        order_food = #{order_food}, order_total_amount = #{order_total_amount}
+        WHERE order_id = #{order_id} AND (order_status = 'UK' OR order_status = 'UM');
+    </update>
+
+    <select id="selectOrdByOrdIdAndSts" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, board_id, order_people_number, order_date, order_board_date,
+        order_board_time_interval,order_total_amount, order_status,user_id,coupon_id, order_food,
+        order_food_num, order_paid FROM dc_order
+        WHERE order_id = #{order_id} AND (order_status = #{order_status_first} OR order_status = #{order_status_second}
+    </select>
+
+    <update id="updateOrdFoodAndFoodNumByOrdId">
+        UPDATE dc_order SET order_food = #{food}, order_food_num = #{foodNum}, order_total_amount = #{order_total_amt}
+        WHERE order_id = #{order_id} AND (order_status = 'UK' OR order_status = 'UM');
+    </update>
+
+    <update id="updateOrdStsAndCpIdOrdPaidByOrdId">
+        UPDATE dc_order SET order_status = #{ord_sts}, coupon_id = #{coupon_id},
+        order_paid = #{order_paid}
+        WHERE order_id = #{order_id}
+    </update>
+
+    <select id="selectOrdTimeAndAmtByUsrIdAndOrdStsAndBeginTimeAndEndTime" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_paid, order_date
+        FROM dc_order
+        WHERE user_id = #{user_id} AND order_status = #{ord_sts} AND (order_date BETWEEN #{beginTime} AND #{endTime});
+    </select>
+
+    <update id="updateOrdStsByIdAndSts">
+        UPDATE dc_order SET order_status = #{newOrdSts}
+        WHERE order_id = #{ordId} AND order_status = #{oldOrdSts}
+    </update>
+
+    <select id="selectOrdWithoutFinishByUsrId" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, order_status FROM dc_order
+        WHERE user_id = #{user_id} AND (order_status = 'UK' OR order_status = 'UM')
+    </select>
+
+    <select id="selectOrdByUsrIdAndUDSts" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, board_id, order_people_number, order_date, order_board_date,
+        order_board_time_interval,order_total_amount, order_status,user_id,coupon_id, order_food,
+        order_food_num, order_paid FROM dc_order
+        WHERE order_date = (
+        SELECT MAX(order_date) FROM dc_order WHERE user_id = #{user_id} AND order_status = 'UD')
+    </select>
+
+    <update id="updateOrdFoodByOrdIdAndUKUMSts">
+        UPDATE dc_order SET order_food = #{food}, order_food_num = #{foodNum}, order_total_amount = #{food_total_amt}
+        WHERE order_id = #{order_id} AND (order_status = 'UM' OR order_status = 'UK')
+    </update>
+
+    <select id="selectOrdByOrdIdAndUKUMSts" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, board_id, order_people_number, order_date, order_board_date,
+        order_board_time_interval,order_total_amount, order_status,user_id,coupon_id, order_food,
+        order_food_num, order_paid FROM dc_order
+        WHERE order_id = #{order_id} AND (order_status = 'UM' OR order_status = 'UK')
+    </select>
+    <update id="updateOrdBoardAndStsByOrderIdAndOrdSts">
+        UPDATE dc_order SET order_board_date = #{order_date_board}, order_board_time_interval = #{order_board_time_interval},
+        order_people_number = #{order_people_number}, board_id = #{order_board_id}
+        WHERE order_id = #{order_id} AND order_status = 'UM'
+    </update>
+    <update id="updateOrderStsByOrderId">
+        UPDATE dc_order SET order_status = #{order_sts}
+        WHERE order_id = #{order_id} AND order_status = 'UM';
+    </update>
+    
+    <update id="updateOrderFoodAndNumByOrdId">
+        UPDATE dc_order SET order_food = #{food}, order_food_num = #{food_num}
+        WHERE order_id = #{order_id} AND (order_status = 'UM' OR order_status = 'UK')
+    </update>
+
+    <select id="selectTheRecentOrdByUserId" resultType="com.ineedwhite.diancan.dao.domain.OrderDo">
+        SELECT order_id, board_id, order_people_number, order_date, order_board_date,
+        order_board_time_interval,order_total_amount, order_status,user_id,coupon_id, order_food,
+        order_food_num, order_paid FROM dc_order
+        WHERE order_date = (
+        SELECT MAX(order_date) FROM dc_order WHERE user_id = #{user_id})
+    </select>
+</mapper>
